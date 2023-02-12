@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import '../../core/exceptions/repository_exception.dart';
-import '../../core/exceptions/unathorized_exception.dart';
+import '../../core/exceptions/unauthorized_exception.dart';
 import '../../core/rest_client/custom_dio.dart';
 
 import '../../models/auth_model.dart';
@@ -27,7 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on DioError catch (e, s) {
       if (e.response?.statusCode == 403) {
         log('Permissão negada!', error: e, stackTrace: s);
-        throw UnathorizedException();
+        throw UnauthorizedException();
       }
 
       log('Erro ao realizar login', error: e, stackTrace: s);

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:vakinha_delivery_app/app/pages/auth/login/login_router.dart';
+import 'package:vakinha_delivery_app/app/pages/auth/register/register_router.dart';
+import 'package:vakinha_delivery_app/app/pages/order/order_page.dart';
 
 import 'core/provider/application_binding.dart';
 import 'core/ui/theme/theme_config.dart';
@@ -21,8 +24,9 @@ class Dw9DeliveryApp extends StatelessWidget {
           '/': (context) => const SplashPage(),
           '/home': (context) => HomeRouter.page,
           '/productDetail': (context) => ProductDatailRouter.page,
-          '/auth/login': (context) => const LoginPage(),
-          '/auth/register': (context) => const RegisterPage(),
+          '/auth/login': (context) => LoginRouter.page,
+          '/auth/register': (context) => RegisterRouter.page,
+          '/order': (context) => const OrderPage(),
         },
       ),
     );
