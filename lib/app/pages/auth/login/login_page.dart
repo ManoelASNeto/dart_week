@@ -69,7 +69,6 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                         height: 30,
                       ),
                       TextFormField(
-                        obscureText: true,
                         controller: _emailEC,
                         validator: Validatorless.multiple(
                           [
@@ -85,6 +84,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
                         height: 30,
                       ),
                       TextFormField(
+                        obscureText: true,
                         controller: _passwordEC,
                         validator: Validatorless.multiple(
                           [

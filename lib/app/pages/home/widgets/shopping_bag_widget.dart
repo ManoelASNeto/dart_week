@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:vakinha_delivery_app/app/pages/home/home_controller.dart';
 
 import '../../../core/extensions/formater_extensions.dart';
 import '../../../core/ui/helpers/size_extensions.dart';
@@ -14,7 +16,8 @@ class ShoppingBagWidget extends StatelessWidget {
   });
 
   Future<void> _goOrder(BuildContext context) async {
-    var navigator = Navigator.of(context);
+    final navigator = Navigator.of(context);
+    final controller = context.read<HomeController>();
     final sp = await SharedPreferences.getInstance();
     if (!sp.containsKey('accessToken')) {
       final loginResult = await navigator.pushNamed('/auth/login');
@@ -23,7 +26,8 @@ class ShoppingBagWidget extends StatelessWidget {
       }
     }
 
-    await navigator.pushNamed('/order', arguments: bag);
+    final updateBag = await navigator.pushNamed('/order', arguments: bag);
+    controller.updateBag(updateBag as List<OrderProductDto>);
   }
 
   @override

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:vakinha_delivery_app/app/core/ui/styles/colors_app.dart';
-import 'package:vakinha_delivery_app/app/core/ui/styles/text_style.dart';
-import 'package:vakinha_delivery_app/app/core/ui/widgets/delivery_increment_decrement_button.dart';
+import 'package:provider/provider.dart';
+import 'package:vakinha_delivery_app/app/pages/order/order_controller.dart';
+import '../../../core/extensions/formater_extensions.dart';
+import '../../../core/ui/styles/colors_app.dart';
+import '../../../core/ui/styles/text_style.dart';
+import '../../../core/ui/widgets/delivery_increment_decrement_button.dart';
 
-import 'package:vakinha_delivery_app/app/dto/order_product_dto.dart';
+import '../../../dto/order_product_dto.dart';
 
 class OrderProductTile extends StatelessWidget {
   final int index;
@@ -17,12 +20,13 @@ class OrderProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = productDto.productModel;
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Row(
         children: [
           Image.network(
-            'https://burgerx.com.br/assets/img/galeria/burgers/x-burger.jpg',
+            product.image,
             width: 80,
             height: 80,
             fit: BoxFit.cover,
@@ -34,7 +38,7 @@ class OrderProductTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'X-burger',
+                    product.name,
                     style:
                         context.textStyles.textRegular.copyWith(fontSize: 16),
                   ),
@@ -42,14 +46,25 @@ class OrderProductTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '19.90',
+                        (productDto.amount * product.price).currencyPtBR,
                         style: context.textStyles.textMidium.copyWith(
                           fontSize: 14,
                           color: context.colors.secondary,
                         ),
                       ),
                       DeliveryIncrementDecrementButton.compact(
-                          amount: 1, incrementTap: () {}, decrementTap: () {}),
+                        amount: productDto.amount,
+                        incrementTap: () {
+                          context
+                              .read<OrderController>()
+                              .incrementProduct(index);
+                        },
+                        decrementTap: () {
+                          context
+                              .read<OrderController>()
+                              .decrementProduct(index);
+                        },
+                      ),
                     ],
                   )
                 ],

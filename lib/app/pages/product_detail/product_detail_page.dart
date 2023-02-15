@@ -49,8 +49,9 @@ class _ProductDetailPageState
               },
               child: Text(
                 'Cancelar',
-                style: context.textStyles.textExtraBold
-                    .copyWith(color: Colors.red),
+                style: context.textStyles.textBold.copyWith(
+                  color: Colors.red,
+                ),
               ),
             ),
             TextButton(
@@ -67,7 +68,7 @@ class _ProductDetailPageState
                 'Confirmar',
                 style: context.textStyles.textBold,
               ),
-            ),
+            )
           ],
         );
       },
@@ -200,7 +201,7 @@ class _ProductDetailPageState
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
